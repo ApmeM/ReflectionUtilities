@@ -1,14 +1,22 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-
-namespace Utilites.ReflectionUtilites
+﻿namespace ReflectionUtilites
 {
+    #region Using Directives
+
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+
+    #endregion
+
     public class ReflectionPropertyList : List<ReflectionProperty>
     {
+        #region Constructors and Destructors
+
         public ReflectionPropertyList(List<PropertyInfo> properties, ReflectionClass parent)
         {
-            AddRange((from property in properties select new ReflectionProperty(property, parent)));
+            this.AddRange(from property in properties select new ReflectionProperty(property, parent));
         }
+
+        #endregion
     }
 }

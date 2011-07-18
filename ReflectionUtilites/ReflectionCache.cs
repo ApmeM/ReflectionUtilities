@@ -1,17 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Utilites.ReflectionUtilites
+﻿namespace ReflectionUtilites
 {
+    #region Using Directives
+
+    using System;
+    using System.Collections.Generic;
+
+    #endregion
+
     public class ReflectionCache
     {
-        private static readonly Dictionary<Type, ReflectionClass> _Cache = new Dictionary<Type, ReflectionClass>();
+        #region Constants and Fields
+
+        private static readonly Dictionary<Type, ReflectionClass> Cache = new Dictionary<Type, ReflectionClass>();
+
+        #endregion
+
+        #region Public Methods
 
         public static ReflectionClass GetReflection(Type t)
         {
-            if (!_Cache.ContainsKey(t))
-                _Cache[t] = new ReflectionClass(t);
-            return _Cache[t];
+            if (!Cache.ContainsKey(t))
+            {
+                Cache[t] = new ReflectionClass(t);
+            }
+
+            return Cache[t];
         }
+
+        #endregion
     }
 }

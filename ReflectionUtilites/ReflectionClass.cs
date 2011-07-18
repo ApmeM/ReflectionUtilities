@@ -1,47 +1,97 @@
-﻿using System;
-using System.Linq;
-
-namespace Utilites.ReflectionUtilites
+﻿namespace ReflectionUtilites
 {
+    #region Using Directives
+
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+
+    #endregion
+
     public class ReflectionClass
     {
-        private readonly Type _BaseType; 
-        private readonly ReflectionAttributeList _Attributes;
-        private readonly ReflectionPropertyList _Properties;
-        private readonly string _Name;
-        private readonly string _FullName;
+        #region Constants and Fields
+
+        private readonly ReflectionAttributeList attributes;
+
+        private readonly Type baseType;
+
+        private readonly string fullName;
+
+        private readonly string name;
+
+        private readonly ReflectionPropertyList properties;
+
+        private readonly ReflectionMethodList methods;
+
+        #endregion
+
+        #region Constructors and Destructors
 
         public ReflectionClass(Type type)
         {
-            _Attributes = new ReflectionAttributeList(type.GetCustomAttributes(true).OfType<Attribute>().ToList());
-            _BaseType = type;
-            _Properties = new ReflectionPropertyList(type.GetProperties().ToList(), this);
-            _Name = type.Name;
-            _FullName = type.FullName;
+            this.attributes = new ReflectionAttributeList(type.GetCustomAttributes(true).OfType<Attribute>().ToList());
+            this.baseType = type;
+            this.properties = new ReflectionPropertyList(type.GetProperties().ToList(), this);
+            var propertiesMethods = this.properties.SelectMany(a => new List<MethodInfo> { a.GetMethod, a.SetMethod });
+            this.methods = new ReflectionMethodList(type.GetMethods().Except(propertiesMethods).ToList(), this);
+            this.name = type.Name;
+            this.fullName = type.FullName;
+        }
+
+        #endregion
+
+        #region Properties
+
+        public ReflectionAttributeList Attributes
+        {
+            get
+            {
+                return this.attributes;
+            }
         }
 
         public Type BaseType
         {
-            get { return _BaseType; }
+            get
+            {
+                return this.baseType;
+            }
         }
 
-        public String Name
+        public string FullName
         {
-            get { return _Name; }
+            get
+            {
+                return this.fullName;
+            }
         }
-        public String FullName
+
+        public string Name
         {
-            get { return _FullName; }
+            get
+            {
+                return this.name;
+            }
         }
 
         public ReflectionPropertyList Properties
         {
-            get { return _Properties; }
+            get
+            {
+                return this.properties;
+            }
         }
 
-        public ReflectionAttributeList Attributes
+        public ReflectionMethodList Methods
         {
-            get { return _Attributes; }
+            get
+            {
+                return this.methods;
+            }
         }
+
+        #endregion
     }
 }

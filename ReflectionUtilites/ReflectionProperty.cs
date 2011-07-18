@@ -1,67 +1,142 @@
-﻿using System;
-using System.Linq;
-using System.Reflection;
-
-namespace Utilites.ReflectionUtilites
+﻿namespace ReflectionUtilites
 {
+    #region Using Directives
+
+    using System;
+    using System.Linq;
+    using System.Reflection;
+
+    #endregion
+
     public class ReflectionProperty
     {
-        private readonly ReflectionAttributeList _Attributes;
-        private readonly PropertyInfo _BaseProperty;
-        private readonly ReflectionClass _Parent;
-        private readonly string _Name;
-        private readonly Type _PropertyType;
+        #region Constants and Fields
+
+        private readonly ReflectionAttributeList attributes;
+
+        private readonly MethodInfo getMethod;
+
+        private readonly string name;
+
+        private readonly ReflectionClass parent;
+
+        private readonly PropertyInfo property;
+
+        private readonly Type propertyType;
+
+        private readonly MethodInfo setMethod;
+
+        #endregion
+
+        #region Constructors and Destructors
 
         public ReflectionProperty(PropertyInfo property, ReflectionClass parent)
         {
-            _Attributes = new ReflectionAttributeList(property.GetCustomAttributes(true).OfType<Attribute>().ToList());
-            _BaseProperty = property;
-            _Parent = parent;
-            _Name = property.Name;
-            _PropertyType = property.PropertyType;
+            this.property = property;
+            this.parent = parent;
+
+            this.attributes =
+                new ReflectionAttributeList(this.property.GetCustomAttributes(true).OfType<Attribute>().ToList());
+            this.name = this.property.Name;
+            this.propertyType = this.property.PropertyType;
+            this.getMethod = this.property.GetGetMethod() ?? this.property.GetGetMethod(true);
+            this.setMethod = this.property.GetSetMethod() ?? this.property.GetSetMethod(true);
         }
+
+        #endregion
+
+        #region Properties
 
         public ReflectionAttributeList Attributes
         {
-            get { return _Attributes; }
-        }
-
-        public string Name
-        {
-            get { return _Name; }
-        }
-
-        public Type PropertyType
-        {
-            get { return _PropertyType; }
-        }
-
-        public string WithClassName
-        {
-            get { return _Parent.Name + "." + _Name; }
+            get
+            {
+                return this.attributes;
+            }
         }
 
         public string FullName
         {
-            get { return _Parent.FullName + "." + _Name; }
+            get
+            {
+                return this.parent.FullName + "." + this.name;
+            }
         }
 
-        public void SetValue(Object where, Object what)
+        public string Name
         {
-            if(where == null)
-                return;
-            if (where.GetType() != _Parent.BaseType)
-                return;
-            _BaseProperty.SetValue(where, Convert.ChangeType(what, _PropertyType), null);
+            get
+            {
+                return this.name;
+            }
         }
 
-        public Object GetValue(Object where)
+        public Type PropertyType
         {
-            if (where == null)
-                return null;
-            if (where.GetType() != _Parent.BaseType)
-                return null;
-            return _BaseProperty.GetValue(where, null);
+            get
+            {
+                return this.propertyType;
+            }
         }
+
+        public string WithClassName
+        {
+            get
+            {
+                return this.parent.Name + "." + this.name;
+            }
+        }
+
+        internal MethodInfo GetMethod
+        {
+            get
+            {
+                return this.getMethod;
+            }
+        }
+
+        internal MethodInfo SetMethod
+        {
+            get
+            {
+                return this.setMethod;
+            }
+        }
+
+        #endregion
+
+        #region Public Methods
+
+        public object GetValue(object from)
+        {
+            if (from == null)
+            {
+                return null;
+            }
+
+            if (from.GetType() != this.parent.BaseType)
+            {
+                return null;
+            }
+
+            return this.getMethod.Invoke(from, null);
+        }
+
+        public void SetValue(object to, object what)
+        {
+            if (to == null)
+            {
+                return;
+            }
+
+            if (to.GetType() != this.parent.BaseType)
+            {
+                return;
+            }
+
+            this.setMethod.Invoke(to, new[] { Convert.ChangeType(what, this.propertyType) });
+        }
+
+        #endregion
     }
 }

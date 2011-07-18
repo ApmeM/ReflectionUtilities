@@ -1,30 +1,34 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilites", "Utilites\Utilites.csproj", "{18558DEC-F7DB-4832-83C2-DBDD1DB0DB43}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReflectionUtilites", "ReflectionUtilites\ReflectionUtilites.csproj", "{050C3333-8470-4F15-9D63-9138EA64CA76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerControls", "ServerControls\ServerControls.csproj", "{81819C3D-C1B6-4063-AEC3-D4A84E96C1FC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReflectionUtilitesTest", "ReflectionUtilitesTest\ReflectionUtilitesTest.csproj", "{67B3920C-E5B6-4685-876D-F73BAE89205F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RSS", "RSS\RSS.csproj", "{E43F1013-ADC6-45C8-829F-19CCC5C1D91F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{62531A1A-A19D-4B27-9997-E16DFDC62EBA}"
+	ProjectSection(SolutionItems) = preProject
+		cs-reflectioncache.vsmdi = cs-reflectioncache.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
 EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = cs-reflectioncache.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{18558DEC-F7DB-4832-83C2-DBDD1DB0DB43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{18558DEC-F7DB-4832-83C2-DBDD1DB0DB43}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{18558DEC-F7DB-4832-83C2-DBDD1DB0DB43}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{18558DEC-F7DB-4832-83C2-DBDD1DB0DB43}.Release|Any CPU.Build.0 = Release|Any CPU
-		{81819C3D-C1B6-4063-AEC3-D4A84E96C1FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{81819C3D-C1B6-4063-AEC3-D4A84E96C1FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{81819C3D-C1B6-4063-AEC3-D4A84E96C1FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{81819C3D-C1B6-4063-AEC3-D4A84E96C1FC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E43F1013-ADC6-45C8-829F-19CCC5C1D91F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E43F1013-ADC6-45C8-829F-19CCC5C1D91F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E43F1013-ADC6-45C8-829F-19CCC5C1D91F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E43F1013-ADC6-45C8-829F-19CCC5C1D91F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{050C3333-8470-4F15-9D63-9138EA64CA76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{050C3333-8470-4F15-9D63-9138EA64CA76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{050C3333-8470-4F15-9D63-9138EA64CA76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{050C3333-8470-4F15-9D63-9138EA64CA76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67B3920C-E5B6-4685-876D-F73BAE89205F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67B3920C-E5B6-4685-876D-F73BAE89205F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67B3920C-E5B6-4685-876D-F73BAE89205F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67B3920C-E5B6-4685-876D-F73BAE89205F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
