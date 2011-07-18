@@ -1,4 +1,4 @@
-namespace ReflectionUtilitesTest
+namespace ReflectionUtilites.Test
 {
     using System.ComponentModel;
 

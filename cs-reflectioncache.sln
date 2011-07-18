@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReflectionUtilites", "ReflectionUtilites\ReflectionUtilites.csproj", "{050C3333-8470-4F15-9D63-9138EA64CA76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReflectionUtilitesTest", "ReflectionUtilitesTest\ReflectionUtilitesTest.csproj", "{67B3920C-E5B6-4685-876D-F73BAE89205F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReflectionUtilitesTest", "ReflectionUtilites.Test\ReflectionUtilites.Test.csproj", "{67B3920C-E5B6-4685-876D-F73BAE89205F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{62531A1A-A19D-4B27-9997-E16DFDC62EBA}"
 	ProjectSection(SolutionItems) = preProject

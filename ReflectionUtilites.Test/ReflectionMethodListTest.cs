@@ -1,8 +1,6 @@
-﻿namespace ReflectionUtilitesTest
+﻿namespace ReflectionUtilites.Test
 {
     #region Using Directives
-
-    using System;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

@@ -1,8 +1,6 @@
-﻿namespace ReflectionUtilitesTest
+﻿namespace ReflectionUtilites.Test
 {
     #region Using Directives
-
-    using System;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -32,7 +30,6 @@
         public void GetReflection_NullType_Error()
         {
             // Arrange
-            
 
             // Act
             NullReferenceReflectionException e = null;

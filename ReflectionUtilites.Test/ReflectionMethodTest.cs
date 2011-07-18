@@ -1,8 +1,6 @@
-﻿namespace ReflectionUtilitesTest
+﻿namespace ReflectionUtilites.Test
 {
     #region Using Directives
-
-    using System;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -52,7 +50,7 @@
             var name = reflection.FullName;
 
             // Assert
-            Assert.AreEqual("ReflectionUtilitesTest.ExampleObject.TestMethod", name);
+            Assert.AreEqual("ReflectionUtilites.Test.ExampleObject.TestMethod", name);
         }
 
         [TestMethod]

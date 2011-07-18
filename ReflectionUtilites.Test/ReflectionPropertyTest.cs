@@ -1,4 +1,4 @@
-﻿namespace ReflectionUtilitesTest
+﻿namespace ReflectionUtilites.Test
 {
     #region Using Directives
 
@@ -52,7 +52,7 @@
             var name = reflection.FullName;
 
             // Assert
-            Assert.AreEqual("ReflectionUtilitesTest.ExampleObject.Property1", name);
+            Assert.AreEqual("ReflectionUtilites.Test.ExampleObject.Property1", name);
         }
 
         [TestMethod]
