@@ -1,0 +1,14 @@
+bin/
+obj/
+*.suo
+*.user
+*.mdf
+*.MDF
+*.ldf
+*.LDF
+_ReSharper*/
+TestResults/
+.hg/
+StyleCop.Cache
+*.testsettings
+*.vsmdi
