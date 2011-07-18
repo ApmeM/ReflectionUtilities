@@ -2,6 +2,9 @@ namespace ReflectionUtilitesTest
 {
     using System.ComponentModel;
 
+    [Custom]
+    [Custom]
+    [Custom]
     public class ExampleObject
     {
         public int Property1 { get; set; }

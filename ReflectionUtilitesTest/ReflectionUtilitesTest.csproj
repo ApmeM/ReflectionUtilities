@@ -45,6 +45,7 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ReflectionAttributeListTest.cs" />
     <Compile Include="ReflectionMethodTest.cs" />
     <Compile Include="ReflectionMethodListTest.cs" />
     <Compile Include="CustomAttribute.cs" />
