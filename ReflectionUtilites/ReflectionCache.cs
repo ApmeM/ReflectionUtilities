@@ -5,6 +5,8 @@
     using System;
     using System.Collections.Generic;
 
+    using ReflectionUtilites.Exceptions;
+
     #endregion
 
     public static class ReflectionCache
@@ -19,6 +21,11 @@
 
         public static ReflectionClass GetReflection(Type t)
         {
+            if (t == null)
+            {
+                throw new NullReferenceReflectionException();
+            }
+
             if (!Cache.ContainsKey(t))
             {
                 Cache[t] = new ReflectionClass(t);

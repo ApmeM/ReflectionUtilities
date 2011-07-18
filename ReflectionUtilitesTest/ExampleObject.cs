@@ -5,6 +5,7 @@ namespace ReflectionUtilitesTest
     [Custom]
     [Custom]
     [Custom]
+    [Category]
     public class ExampleObject
     {
         public int Property1 { get; set; }

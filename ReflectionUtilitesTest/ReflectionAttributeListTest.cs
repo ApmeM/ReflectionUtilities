@@ -25,7 +25,7 @@
             int count = reflection.Count;
 
             // Assert
-            Assert.AreEqual(3, count);
+            Assert.AreEqual(4, count);
         }
 
         [TestMethod]
