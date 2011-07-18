@@ -21,11 +21,11 @@
 
         #region Indexers
 
-        public Attribute this[Type type]
+        public List<Attribute> this[Type type]
         {
             get
             {
-                return (from attr in this where attr.GetType() == type select attr).FirstOrDefault();
+                return this.Where(a => a.GetType() == type).ToList();
             }
         }
 

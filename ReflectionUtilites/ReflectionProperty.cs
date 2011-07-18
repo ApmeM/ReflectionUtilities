@@ -6,6 +6,8 @@
     using System.Linq;
     using System.Reflection;
 
+    using ReflectionUtilites.Exceptions;
+
     #endregion
 
     public class ReflectionProperty
@@ -14,7 +16,7 @@
 
         private readonly ReflectionAttributeList attributes;
 
-        private readonly MethodInfo getMethod;
+        private readonly ReflectionMethod getMethod;
 
         private readonly string name;
 
@@ -24,7 +26,7 @@
 
         private readonly Type propertyType;
 
-        private readonly MethodInfo setMethod;
+        private readonly ReflectionMethod setMethod;
 
         #endregion
 
@@ -39,8 +41,18 @@
                 new ReflectionAttributeList(this.property.GetCustomAttributes(true).OfType<Attribute>().ToList());
             this.name = this.property.Name;
             this.propertyType = this.property.PropertyType;
-            this.getMethod = this.property.GetGetMethod() ?? this.property.GetGetMethod(true);
-            this.setMethod = this.property.GetSetMethod() ?? this.property.GetSetMethod(true);
+            
+            var method = this.property.GetGetMethod() ?? this.property.GetGetMethod(true);
+            if (method != null)
+            {
+                this.getMethod = new ReflectionMethod(method, parent);
+            }
+
+            method = this.property.GetSetMethod() ?? this.property.GetSetMethod(true);
+            if (method != null)
+            {
+                this.setMethod = new ReflectionMethod(method, parent);
+            }
         }
 
         #endregion
@@ -87,36 +99,15 @@
             }
         }
 
-        internal MethodInfo GetMethod
-        {
-            get
-            {
-                return this.getMethod;
-            }
-        }
-
-        internal MethodInfo SetMethod
-        {
-            get
-            {
-                return this.setMethod;
-            }
-        }
-
         #endregion
 
         #region Public Methods
 
         public object GetValue(object from)
         {
-            if (from == null)
+            if (this.getMethod == null)
             {
-                return null;
-            }
-
-            if (from.GetType() != this.parent.BaseType)
-            {
-                return null;
+                throw new NoSuchMethodReflectionException();
             }
 
             return this.getMethod.Invoke(from, null);
@@ -124,17 +115,12 @@
 
         public void SetValue(object to, object what)
         {
-            if (to == null)
+            if (this.setMethod == null)
             {
-                return;
+                throw new NoSuchMethodReflectionException();
             }
-
-            if (to.GetType() != this.parent.BaseType)
-            {
-                return;
-            }
-
-            this.setMethod.Invoke(to, new[] { Convert.ChangeType(what, this.propertyType) });
+            
+            this.setMethod.Invoke(to, new[] { what });
         }
 
         #endregion

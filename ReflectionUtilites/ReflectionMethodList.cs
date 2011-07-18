@@ -11,11 +11,11 @@ namespace ReflectionUtilites
             this.AddRange(from method in methods select new ReflectionMethod(method, parent));
         }
 
-        public ReflectionMethod this[string name]
+        public List<ReflectionMethod> this[string name]
         {
             get
             {
-                return (from method in this where method.Name == name select method).FirstOrDefault();
+                return this.Where(a => a.Name == name).ToList();
             }
         }
     }

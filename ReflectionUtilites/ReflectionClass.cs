@@ -33,9 +33,10 @@
         {
             this.attributes = new ReflectionAttributeList(type.GetCustomAttributes(true).OfType<Attribute>().ToList());
             this.baseType = type;
-            this.properties = new ReflectionPropertyList(type.GetProperties().ToList(), this);
-            var propertiesMethods = this.properties.SelectMany(a => new List<MethodInfo> { a.GetMethod, a.SetMethod });
-            this.methods = new ReflectionMethodList(type.GetMethods().Except(propertiesMethods).ToList(), this);
+            var propertyInfos = type.GetProperties().ToList();
+            var propertyMethods = propertyInfos.SelectMany(a => new[] { a.GetGetMethod(), a.GetSetMethod() });
+            this.properties = new ReflectionPropertyList(propertyInfos, this);
+            this.methods = new ReflectionMethodList(type.GetMethods().Except(propertyMethods).ToList(), this);
             this.name = type.Name;
             this.fullName = type.FullName;
         }

@@ -40,6 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\NoSuchMethodReflectionException.cs" />
+    <Compile Include="Exceptions\NullReferenceReflectionException.cs" />
+    <Compile Include="Exceptions\ReflectionException.cs" />
+    <Compile Include="Exceptions\WrongObjectReflectionException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReflectionAttributeList.cs" />
     <Compile Include="ReflectionCache.cs" />
