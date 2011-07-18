@@ -12,7 +12,7 @@
     {
         #region Constructors and Destructors
 
-        public ReflectionAttributeList(List<Attribute> attributes)
+        internal ReflectionAttributeList(List<Attribute> attributes)
         {
             this.AddRange(attributes);
         }

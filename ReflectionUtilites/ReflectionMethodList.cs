@@ -6,7 +6,7 @@ namespace ReflectionUtilites
 
     public class ReflectionMethodList : List<ReflectionMethod>
     {
-        public ReflectionMethodList(List<MethodInfo> methods, ReflectionClass parent)
+        internal ReflectionMethodList(List<MethodInfo> methods, ReflectionClass parent)
         {
             this.AddRange(from method in methods select new ReflectionMethod(method, parent));
         }

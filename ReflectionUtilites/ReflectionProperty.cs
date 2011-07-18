@@ -30,7 +30,7 @@
 
         #region Constructors and Destructors
 
-        public ReflectionProperty(PropertyInfo property, ReflectionClass parent)
+        internal ReflectionProperty(PropertyInfo property, ReflectionClass parent)
         {
             this.property = property;
             this.parent = parent;

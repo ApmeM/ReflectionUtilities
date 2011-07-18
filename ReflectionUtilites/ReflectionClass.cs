@@ -29,7 +29,7 @@
 
         #region Constructors and Destructors
 
-        public ReflectionClass(Type type)
+        internal ReflectionClass(Type type)
         {
             this.attributes = new ReflectionAttributeList(type.GetCustomAttributes(true).OfType<Attribute>().ToList());
             this.baseType = type;

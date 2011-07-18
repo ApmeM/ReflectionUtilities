@@ -13,7 +13,7 @@
 
         private ParameterInfo[] parameters;
 
-        public ReflectionMethod(MethodInfo method, ReflectionClass parent)
+        internal ReflectionMethod(MethodInfo method, ReflectionClass parent)
         {
             this.method = method;
             this.parent = parent;

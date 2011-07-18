@@ -12,7 +12,7 @@
     {
         #region Constructors and Destructors
 
-        public ReflectionPropertyList(List<PropertyInfo> properties, ReflectionClass parent)
+        internal ReflectionPropertyList(List<PropertyInfo> properties, ReflectionClass parent)
         {
             this.AddRange(from property in properties select new ReflectionProperty(property, parent));
         }

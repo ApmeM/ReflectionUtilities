@@ -7,7 +7,7 @@
 
     #endregion
 
-    public class ReflectionCache
+    public static class ReflectionCache
     {
         #region Constants and Fields
 
