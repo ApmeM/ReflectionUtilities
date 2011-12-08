@@ -1,4 +1,4 @@
-namespace ReflectionUtilites.Test
+namespace ReflectionUtilites.Test.ExampleObjects
 {
     using System.ComponentModel;
 
@@ -6,7 +6,7 @@ namespace ReflectionUtilites.Test
     [Custom]
     [Custom]
     [Category]
-    public class ExampleObject
+    public class ExampleObject : IExampleInterface
     {
         public int Property1 { get; set; }
 

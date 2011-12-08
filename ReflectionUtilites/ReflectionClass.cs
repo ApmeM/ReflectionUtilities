@@ -3,6 +3,7 @@
     #region Using Directives
 
     using System;
+    using System.Collections.Generic;
     using System.Linq;
 
     #endregion
@@ -15,13 +16,15 @@
 
         private readonly Type baseType;
 
+        private readonly Dictionary<Tuple<Type, Type>, bool> cache = new Dictionary<Tuple<Type, Type>, bool>();
+
         private readonly string fullName;
+
+        private readonly ReflectionMethodList methods;
 
         private readonly string name;
 
         private readonly ReflectionPropertyList properties;
-
-        private readonly ReflectionMethodList methods;
 
         #endregion
 
@@ -67,6 +70,14 @@
             }
         }
 
+        public ReflectionMethodList Methods
+        {
+            get
+            {
+                return this.methods;
+            }
+        }
+
         public string Name
         {
             get
@@ -83,12 +94,21 @@
             }
         }
 
-        public ReflectionMethodList Methods
+        #endregion
+
+        #region Public Methods
+
+        public bool IsAssignableFrom(Type type)
         {
-            get
+            var tuple = new Tuple<Type, Type>(type, this.baseType);
+            if (this.cache.ContainsKey(tuple))
             {
-                return this.methods;
+                return this.cache[tuple];
             }
+
+            var result = type.IsAssignableFrom(this.baseType);
+            this.cache[tuple] = result;
+            return result;
         }
 
         #endregion

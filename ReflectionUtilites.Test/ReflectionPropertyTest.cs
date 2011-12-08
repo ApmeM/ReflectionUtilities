@@ -8,6 +8,7 @@
 
     using ReflectionUtilites;
     using ReflectionUtilites.Exceptions;
+    using ReflectionUtilites.Test.ExampleObjects;
 
     #endregion
 
@@ -52,7 +53,7 @@
             var name = reflection.FullName;
 
             // Assert
-            Assert.AreEqual("ReflectionUtilites.Test.ExampleObject.Property1", name);
+            Assert.AreEqual("ReflectionUtilites.Test.ExampleObjects.ExampleObject.Property1", name);
         }
 
         [TestMethod]

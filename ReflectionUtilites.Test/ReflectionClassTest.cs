@@ -5,6 +5,7 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using ReflectionUtilites;
+    using ReflectionUtilites.Test.ExampleObjects;
 
     #endregion
 
@@ -75,7 +76,7 @@
             var name = reflection.FullName;
 
             // Assert
-            Assert.AreEqual("ReflectionUtilites.Test.ExampleObject", name);
+            Assert.AreEqual("ReflectionUtilites.Test.ExampleObjects.ExampleObject", name);
         }
 
         [TestMethod]
@@ -89,6 +90,58 @@
 
             // Assert
             Assert.AreEqual("ExampleObject", name);
+        }
+
+        [TestMethod]
+        public void IsAssignableFrom_ForAssignableInterface_True()
+        {
+            // Arrange
+            var reflection = ReflectionCache.GetReflection(typeof(ExampleObject));
+
+            // Act
+            var result = reflection.IsAssignableFrom(typeof(IExampleInterface));
+
+            // Assert
+            Assert.AreEqual(true, result);
+        }
+
+        [TestMethod]
+        public void IsAssignableFrom_ForAssignableBaseInterface_True()
+        {
+            // Arrange
+            var reflection = ReflectionCache.GetReflection(typeof(ExampleObject));
+
+            // Act
+            var result = reflection.IsAssignableFrom(typeof(IExampleBaseInterface));
+
+            // Assert
+            Assert.AreEqual(true, result);
+        }
+
+        [TestMethod]
+        public void IsAssignableFrom_ForAssignableSameClass_True()
+        {
+            // Arrange
+            var reflection = ReflectionCache.GetReflection(typeof(ExampleObject));
+
+            // Act
+            var result = reflection.IsAssignableFrom(typeof(ExampleObject));
+
+            // Assert
+            Assert.AreEqual(true, result);
+        }
+
+        [TestMethod]
+        public void IsAssignableFrom_ForAssignableWrongInterface_False()
+        {
+            // Arrange
+            var reflection = ReflectionCache.GetReflection(typeof(ExampleObject));
+
+            // Act
+            var result = reflection.IsAssignableFrom(typeof(IExampleWrongInterface));
+
+            // Assert
+            Assert.AreEqual(false, result);
         }
 
         #endregion

@@ -5,6 +5,7 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using ReflectionUtilites;
+    using ReflectionUtilites.Test.ExampleObjects;
 
     #endregion
 

@@ -45,6 +45,9 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExampleObjects\IExampleBaseInterface.cs" />
+    <Compile Include="ExampleObjects\IExampleInterface.cs" />
+    <Compile Include="ExampleObjects\IExampleWrongInterface.cs" />
     <Compile Include="ReflectionCacheTest.cs" />
     <Compile Include="ReflectionClassTest.cs" />
     <Compile Include="ReflectionAttributeListTest.cs" />
@@ -52,7 +55,7 @@
     <Compile Include="ReflectionMethodListTest.cs" />
     <Compile Include="CustomAttribute.cs" />
     <Compile Include="ReflectionPropertyTest.cs" />
-    <Compile Include="ExampleObject.cs" />
+    <Compile Include="ExampleObjects\ExampleObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReflectionPropertyListTest.cs" />
   </ItemGroup>
