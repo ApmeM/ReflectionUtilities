@@ -87,17 +87,13 @@
             {
                 throw new NoSuchMethodReflectionException();
             }
-
-            if (obj == null)
+            if (obj != null)
             {
-                throw new NullReferenceReflectionException();
+                if (obj.GetType() != this.parent.BaseType)
+                {
+                    throw new WrongObjectReflectionException(this.parent.BaseType, obj.GetType());
+                }
             }
-
-            if (obj.GetType() != this.parent.BaseType)
-            {
-                throw new WrongObjectReflectionException(this.parent.BaseType, obj.GetType());
-            }
-
             return this.method.Invoke(obj, param);
         }
     }
