@@ -48,6 +48,8 @@
     <Compile Include="ReflectionAttributeList.cs" />
     <Compile Include="ReflectionCache.cs" />
     <Compile Include="ReflectionClass.cs" />
+    <Compile Include="ReflectionConstructor.cs" />
+    <Compile Include="ReflectionConstructorList.cs" />
     <Compile Include="ReflectionField.cs" />
     <Compile Include="ReflectionFieldList.cs" />
     <Compile Include="ReflectionMethod.cs" />
