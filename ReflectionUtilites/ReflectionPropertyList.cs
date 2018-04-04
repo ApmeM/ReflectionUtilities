@@ -12,6 +12,15 @@
     {
         private readonly Dictionary<string, ReflectionProperty> cache = new Dictionary<string, ReflectionProperty>();
 
+        public PropertyInfo[] GetProperties
+        {
+            get
+            {
+                return cache.Values.Select(x => x.Property).ToArray();
+            }
+        }
+
+
         #region Constructors and Destructors
 
         internal ReflectionPropertyList(List<PropertyInfo> properties, ReflectionClass parent)

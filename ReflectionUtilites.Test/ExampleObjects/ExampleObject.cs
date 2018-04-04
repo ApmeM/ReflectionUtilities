@@ -1,4 +1,4 @@
-namespace ReflectionUtilites.Test.ExampleObjects
+﻿namespace ReflectionUtilites.Test.ExampleObjects
 {
     using System.ComponentModel;
 
@@ -8,6 +8,8 @@ namespace ReflectionUtilites.Test.ExampleObjects
     [Category]
     public class ExampleObject : IExampleInterface
     {
+        public int Field1;
+
         public int Property1 { get; set; }
 
         [Custom]
