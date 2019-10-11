@@ -10,12 +10,12 @@
     #endregion
 
     [TestClass]
-    public class ReflectionPropertyListTest
+    public class ReflectionFieldListTest
     {
         #region Public Methods
 
         [TestMethod]
-        public void GetPropertyList_PropertyCount_ExactNumber()
+        public void GetFieldList_PropertyCount_ExactNumber()
         {
             // Arrange
             ReflectionClass rc = ReflectionCache.GetReflection(typeof(ExampleObject));
@@ -28,26 +28,26 @@
         }
 
         [TestMethod]
-        public void FindPropertyByName_PropertyExist_NotNull()
+        public void FindFieldByName_FieldExist_NotNull()
         {
             // Arrange
             ReflectionClass rc = ReflectionCache.GetReflection(typeof(ExampleObject));
 
             // Act
-            var property = rc.Properties["Property1"];
+            var property = rc.Properties["Field"];
 
             // Assert
             Assert.IsNotNull(property);
         }
 
         [TestMethod]
-        public void FindPropertyByName_PropertyNotExist_Null()
+        public void FindFieldByName_FieldNotExist_Null()
         {
             // Arrange
             ReflectionClass rc = ReflectionCache.GetReflection(typeof(ExampleObject));
 
             // Act
-            var property = rc.Properties["Property12"];
+            var property = rc.Properties["Field12"];
 
             // Assert
             Assert.IsNull(property);

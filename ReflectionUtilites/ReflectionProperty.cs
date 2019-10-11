@@ -41,7 +41,7 @@
                 new ReflectionAttributeList(this.property.GetCustomAttributes(true).OfType<Attribute>().ToList());
             this.name = this.property.Name;
             this.propertyType = this.property.PropertyType;
-            
+
             var method = this.property.GetGetMethod() ?? this.property.GetGetMethod(true);
             if (method != null)
             {
@@ -98,19 +98,26 @@
                 return this.parent.Name + "." + this.name;
             }
         }
+        public PropertyInfo Property
+        {
+            get
+            {
+                return property;
+            }
+        }
 
         #endregion
 
         #region Public Methods
 
-        public object GetValue(object from)
+        public object GetValue(object from, params object[] par)
         {
             if (this.getMethod == null)
             {
                 throw new NoSuchMethodReflectionException();
             }
 
-            return this.getMethod.Invoke(from, null);
+            return this.getMethod.Invoke(from, par);
         }
 
         public void SetValue(object to, object what)
@@ -119,7 +126,7 @@
             {
                 throw new NoSuchMethodReflectionException();
             }
-            
+
             this.setMethod.Invoke(to, new[] { what });
         }
 

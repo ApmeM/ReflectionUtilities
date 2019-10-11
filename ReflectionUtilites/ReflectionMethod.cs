@@ -31,13 +31,19 @@
             this.name = this.method.Name;
             this.parameters = this.method.GetParameters();
         }
-
-
         public string FullName
         {
             get
             {
                 return this.parent.FullName + "." + this.name;
+            }
+        }
+
+        public MethodInfo Method
+        {
+            get
+            {
+                return method;
             }
         }
 

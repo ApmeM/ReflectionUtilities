@@ -26,6 +26,10 @@
 
         private readonly ReflectionPropertyList properties;
 
+        private readonly ReflectionFieldList fields;
+
+        private readonly ReflectionConstructorList constructors;
+
         #endregion
 
         #region Constructors and Destructors
@@ -38,6 +42,8 @@
             var propertyMethods = propertyInfos.SelectMany(a => new[] { a.GetGetMethod(), a.GetSetMethod() });
             this.properties = new ReflectionPropertyList(propertyInfos, this);
             this.methods = new ReflectionMethodList(type.GetMethods().Except(propertyMethods).ToList(), this);
+            this.fields = new ReflectionFieldList(type.GetFields().ToList(), this);
+            this.constructors = new ReflectionConstructorList(type.GetConstructors().ToList(), this);
             this.name = type.Name;
             this.fullName = type.FullName;
         }
@@ -91,6 +97,20 @@
             get
             {
                 return this.properties;
+            }
+        }
+        public ReflectionFieldList Fields
+        {
+            get
+            {
+                return this.fields;
+            }
+        }
+        public ReflectionConstructorList Constructors
+        {
+            get
+            {
+                return this.constructors;
             }
         }
 

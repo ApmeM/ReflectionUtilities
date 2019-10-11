@@ -51,9 +51,11 @@
     <Compile Include="ReflectionCacheTest.cs" />
     <Compile Include="ReflectionClassTest.cs" />
     <Compile Include="ReflectionAttributeListTest.cs" />
+    <Compile Include="ReflectionFieldTest.cs" />
     <Compile Include="ReflectionMethodTest.cs" />
     <Compile Include="ReflectionMethodListTest.cs" />
     <Compile Include="CustomAttribute.cs" />
+    <Compile Include="ReflectionFieldListTest.cs" />
     <Compile Include="ReflectionPropertyTest.cs" />
     <Compile Include="ExampleObjects\ExampleObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
