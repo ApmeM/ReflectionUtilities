@@ -6,6 +6,14 @@ Reflection in C# is very expensive operation especially when you use it often en
 
 This small library help you to boost project speed using reflection cache. In this case system will use reflection only once, and then it will take data from memory.
 
+Performance test result :
+
+|             Method |       Mean |   Error |  StdDev |  Gen 0 | Allocated |
+|------------------- |-----------:|--------:|--------:|-------:|----------:|
+| UseReflectionCache |   395.5 ns | 3.47 ns | 3.07 ns | 0.0572 |     240 B |
+|  RegularReflection | 2,353.9 ns | 7.69 ns | 7.19 ns | 0.1068 |     456 B |
+
+
 ## Installation and usage
 
 Just add this sources to your solution (or include compiled dll)

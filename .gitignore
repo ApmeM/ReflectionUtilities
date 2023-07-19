@@ -13,3 +13,4 @@ StyleCop.Cache
 *.testsettings
 *.vsmdi
 /.vs
+BenchmarkDotNet.Artifacts/
