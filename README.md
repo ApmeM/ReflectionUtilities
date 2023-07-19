@@ -54,9 +54,3 @@ Property:
 5. string WithClassName
 6. object GetValue(object from)
 7. void SetValue(object to, object what)
-
-## Copyrights
-
-Created by Artem Votincev (apmem.org)
-
-Distributed under MIT license
