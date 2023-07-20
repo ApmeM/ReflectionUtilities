@@ -1,41 +1,69 @@
-﻿using System;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 
 namespace ReflectionUtilities
 {
     public class ReflectionField
     {
-        private readonly FieldInfo field;
+        public FieldInfo BaseField { get; }
+        public ReflectionClass ParentType { get; }
 
-        public ReflectionClass Parent { get; }
-        public ReflectionAttributeList Attributes { get; }
-        public string Name { get; }
-        public Type FieldType { get; }
+        private ReflectionClass fieldType;
+        private string name;
+        private ReflectionAttributeList attributes;
 
-        public string WithClassName => this.Parent.Name + "." + this.Name;
-        public string FullName => this.Parent.FullName + "." + this.Name;
+        public ReflectionAttributeList Attributes
+        {
+            get
+            {
+                if (this.attributes == null)
+                {
+                    this.attributes = new ReflectionAttributeList(this.BaseField.GetCustomAttributes(true));
+                }
+                return this.attributes;
+            }
+        }
+
+        public string Name
+        {
+            get
+            {
+                if (this.name == null)
+                {
+                    this.name = this.BaseField.Name;
+                }
+                return this.name;
+            }
+        }
+
+        public ReflectionClass FieldType
+        {
+            get
+            {
+                if (this.fieldType == null)
+                {
+                    this.fieldType = ReflectionCache.GetReflection(this.BaseField.FieldType);
+                }
+                return this.fieldType;
+            }
+        }
+
+        public string WithClassName => this.ParentType.Name + "." + this.Name;
+        public string FullName => this.ParentType.FullName + "." + this.Name;
 
         internal ReflectionField(FieldInfo field, ReflectionClass parent)
         {
-            this.field = field;
-            this.Parent = parent;
-
-            this.Attributes = new ReflectionAttributeList(this.field.GetCustomAttributes(true));
-            this.Name = this.field.Name;
-            this.FieldType = this.field.FieldType;
-
+            this.BaseField = field;
+            this.ParentType = parent;
         }
-
 
         public object GetValue(object from)
         {
-            return this.field.GetValue(from);
+            return this.BaseField.GetValue(from);
         }
 
         public void SetValue(object to, object what)
         {
-            this.field.SetValue(to, new[] { what });
+            this.BaseField.SetValue(to, new[] { what });
         }
     }
 }

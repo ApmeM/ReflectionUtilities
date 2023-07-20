@@ -18,7 +18,20 @@
             int count = rc.Methods.Count;
 
             // Assert
-            Assert.AreEqual(7 + 3*2, count);
+            Assert.AreEqual(8 + 3*2, count);
+        }
+
+        [Test]
+        public void GetMethodList_MethodCountByName_DifferentParameters()
+        {
+            // Arrange
+            ReflectionClass rc = ReflectionCache.GetReflection(typeof(ExampleObject));
+            
+            // Act
+            int count = rc.Methods["AnotherTest"].Count;
+
+            // Assert
+            Assert.AreEqual(2, count);
         }
 
         [Test]

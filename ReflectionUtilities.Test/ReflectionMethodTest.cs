@@ -85,7 +85,7 @@
             var returnType = reflection.ReturnType;
 
             // Assert
-            Assert.AreEqual(typeof(void), returnType);
+            Assert.AreEqual(typeof(void), returnType.BaseType);
         }
 
         [Test]

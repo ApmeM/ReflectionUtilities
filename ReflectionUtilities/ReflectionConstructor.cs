@@ -1,35 +1,64 @@
-﻿using System;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 
 namespace ReflectionUtilities
 {
     public class ReflectionConstructor
     {
-        private readonly ConstructorInfo constructor;
+        private ReflectionAttributeList attributes;
+        private ParameterInfo[] parameters;
+        private string name;
 
-        public ReflectionClass Parent { get; }
-        public ConstructorInfo Constructor { get; }
-        public string Name { get; }
-        public ParameterInfo[] Parameters { get; }
-        public ReflectionAttributeList Attributes { get; }
+        public ReflectionClass ParentType { get; }
+        public ConstructorInfo BaseConstructor { get; }
 
-        public string FullName => this.Parent.FullName + "." + this.Name;
-        public string WithClassName => this.Parent.Name + "." + this.Name;
+        public string Name
+        {
+            get
+            {
+                if (this.name == null)
+                {
+                    this.name = this.BaseConstructor.Name;
+                }
+                return this.name;
+            }
+        }
+
+        public ParameterInfo[] Parameters
+        {
+            get
+            {
+                if (this.parameters == null)
+                {
+                    this.parameters = this.BaseConstructor.GetParameters();
+                }
+                return this.parameters;
+            }
+        }
+
+        public ReflectionAttributeList Attributes
+        {
+            get
+            {
+                if (this.attributes == null)
+                {
+                    this.attributes = new ReflectionAttributeList(this.BaseConstructor.GetCustomAttributes(true));
+                }
+                return this.attributes;
+            }
+        }
+
+        public string FullName => this.ParentType.FullName + "." + this.Name;
+        public string WithClassName => this.ParentType.Name + "." + this.Name;
 
         internal ReflectionConstructor(ConstructorInfo method, ReflectionClass parent)
         {
-            this.constructor = method;
-            this.Parent = parent;
-
-            this.Attributes = new ReflectionAttributeList(this.constructor.GetCustomAttributes(true));
-            this.Name = this.constructor.Name;
-            this.Parameters = this.constructor.GetParameters();
+            this.BaseConstructor = method;
+            this.ParentType = parent;
         }
 
         public object Invoke(params object[] param)
         {
-            return this.constructor.Invoke(param);
+            return this.BaseConstructor.Invoke(param);
         }
     }
 }

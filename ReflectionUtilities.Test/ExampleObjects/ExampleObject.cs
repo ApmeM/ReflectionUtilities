@@ -58,5 +58,9 @@
         public void AnotherTest()
         {
         }
+
+        public void AnotherTest(int value)
+        {
+        }
     }
 }
