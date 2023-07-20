@@ -1,53 +1,103 @@
 ﻿namespace ReflectionUtilities
 {
-    using System;
-    using System.Linq;
     using System.Reflection;
 
     public class ReflectionProperty
     {
-        private readonly ReflectionMethod getMethod;
-        private readonly ReflectionMethod setMethod;
+        private ReflectionClass propertyType;
+        private string name;
+        private ReflectionAttributeList attributes;
+        private ReflectionMethod setMethod;
+        private ReflectionMethod getMethod;
 
-        public ReflectionAttributeList Attributes { get; }
-        public string Name { get; }
-        public Type PropertyType { get; }
-        public PropertyInfo Property { get; }
-        public ReflectionClass Parent { get; }
+        public PropertyInfo BaseProperty { get; }
+        public ReflectionClass ParentType { get; }
 
-        public string FullName => this.Parent.FullName + "." + this.Name;
-        public string WithClassName => this.Parent.Name + "." + this.Name;
-
-        internal ReflectionProperty(PropertyInfo property, ReflectionClass parent)
+        public ReflectionMethod GetMethod
         {
-            this.Property = property;
-            this.Parent = parent;
-
-            this.Attributes = new ReflectionAttributeList(this.Property.GetCustomAttributes(true).OfType<Attribute>().ToList());
-            this.Name = this.Property.Name;
-            this.PropertyType = this.Property.PropertyType;
-
-            var method = this.Property.GetGetMethod() ?? this.Property.GetGetMethod(true);
-            if (method != null)
+            get
             {
-                this.getMethod = new ReflectionMethod(method, parent);
-            }
-
-            method = this.Property.GetSetMethod() ?? this.Property.GetSetMethod(true);
-            if (method != null)
-            {
-                this.setMethod = new ReflectionMethod(method, parent);
+                if (this.getMethod == null)
+                {
+                    var method = this.BaseProperty.GetGetMethod() ?? this.BaseProperty.GetGetMethod(true);
+                    if (method != null)
+                    {
+                        this.getMethod = new ReflectionMethod(method, this.ParentType);
+                    }
+                }
+                return this.getMethod;
             }
         }
 
-        public object GetValue(object from, params object[] par)
+        public ReflectionMethod SetMethod
         {
-            return this.getMethod.Invoke(from, par);
+            get
+            {
+                if (this.setMethod == null)
+                {
+                    var method = this.BaseProperty.GetSetMethod() ?? this.BaseProperty.GetSetMethod(true);
+                    if (method != null)
+                    {
+                        this.setMethod = new ReflectionMethod(method, this.ParentType);
+                    }
+                }
+                return this.setMethod;
+            }
+        }
+
+        public ReflectionAttributeList Attributes
+        {
+            get
+            {
+                if (this.attributes == null)
+                {
+                    this.attributes = new ReflectionAttributeList(this.BaseProperty.GetCustomAttributes(true));
+                }
+                return this.attributes;
+            }
+        }
+
+        public string Name
+        {
+            get
+            {
+                if (this.name == null)
+                {
+                    this.name = this.BaseProperty.Name;
+                }
+                return this.name;
+            }
+        }
+
+        public ReflectionClass PropertyType
+        {
+            get
+            {
+                if (this.propertyType == null)
+                {
+                    this.propertyType = ReflectionCache.GetReflection(this.BaseProperty.PropertyType);
+                }
+                return this.propertyType;
+            }
+        }
+
+        public string FullName => this.ParentType.FullName + "." + this.Name;
+        public string WithClassName => this.ParentType.Name + "." + this.Name;
+
+        internal ReflectionProperty(PropertyInfo property, ReflectionClass parent)
+        {
+            this.BaseProperty = property;
+            this.ParentType = parent;
+        }
+
+        public object GetValue(object from)
+        {
+            return this.BaseProperty.GetValue(from);
         }
 
         public void SetValue(object to, object what)
         {
-            this.setMethod.Invoke(to, new[] { what });
+            this.BaseProperty.SetValue(to, what);
         }
     }
 }

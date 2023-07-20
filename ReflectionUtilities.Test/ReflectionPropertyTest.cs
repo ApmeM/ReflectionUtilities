@@ -1,6 +1,7 @@
 ﻿namespace ReflectionUtilities.Test
 {
     using System;
+    using System.Linq;
     using System.Reflection;
     using NUnit.Framework;
 
@@ -85,7 +86,7 @@
             var propertyType = reflection.PropertyType;
 
             // Assert
-            Assert.AreEqual(typeof(ExampleObject), propertyType);
+            Assert.AreEqual(typeof(ExampleObject), propertyType.BaseType);
         }
 
         [Test]
@@ -133,7 +134,7 @@
 
             // Act
             // Assert
-            Assert.Throws<NullReferenceException>(() => reflection.GetValue(obj));
+            Assert.Throws<ArgumentException>(() => reflection.GetValue(obj));
         }
 
         [Test]
@@ -181,7 +182,7 @@
 
             // Act
             // Assert
-            Assert.Throws<NullReferenceException>(() => reflection.SetValue(obj, "test string"));
+            Assert.Throws<ArgumentException>(() => reflection.SetValue(obj, "test string"));
         }
     }
 }

@@ -6,7 +6,7 @@ namespace ReflectionUtilities
 {
     public class ReflectionConstructorList : List<ReflectionConstructor>
     {
-        internal ReflectionConstructorList(List<ConstructorInfo> contructors, ReflectionClass parent)
+        internal ReflectionConstructorList(ConstructorInfo[] contructors, ReflectionClass parent)
         {
             this.AddRange(contructors.Select(a => new ReflectionConstructor(a, parent)));
         }

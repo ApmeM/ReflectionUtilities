@@ -144,10 +144,10 @@
             ExampleObject obj = new ExampleObject();
 
             // Act
-            reflection.Invoke(obj, 3);
+            reflection.Invoke(obj, "3");
 
             // Assert
-            Assert.AreEqual(3, obj.Property1);
+            Assert.AreEqual("3", obj.Property1);
         }
     }
 }

@@ -6,9 +6,12 @@
 
     public class ReflectionAttributeList : List<Attribute>
     {
-        internal ReflectionAttributeList(List<Attribute> attributes)
+        internal ReflectionAttributeList(object[] attributes)
         {
-            this.AddRange(attributes);
+            foreach (var attr in attributes)
+            {
+                this.Add((Attribute)attr);
+            }
         }
 
         public List<Attribute> this[Type type] => this.Where(a => a.GetType() == type).ToList();

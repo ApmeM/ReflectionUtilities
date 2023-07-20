@@ -2,7 +2,6 @@
 using BenchmarkDotNet.Running;
 using ReflectionUtilities;
 using System.Collections.Generic;
-using System.Linq;
 using System;
 
 [MemoryDiagnoser]
@@ -27,25 +26,21 @@ public class Program
         BenchmarkRunner.Run<Program>();
     }
 
+    private ExampleObject obj = new ExampleObject();
+
     [Benchmark]
-    public void UseReflectionCache()
+    public void GetAndUseProperty_WithCache()
     {
-        var type = ReflectionCache.GetReflection(typeof(ExampleObject));
-        var property = type.Properties["Property2"];
-        ExampleObject obj = new ExampleObject();
-        property.SetValue(obj, "test string");
-        var value = property.GetValue(obj);
-        var attributes = property.Attributes;
+        var reflectionType = ReflectionCache.GetReflection(typeof(ExampleObject));
+        var property = reflectionType.Properties["Property2"];
+        property.SetValue(obj, "test");
     }
 
     [Benchmark]
-    public void RegularReflection()
+    public void GetAndUseProperty_Reflection()
     {
-        var type = typeof(ExampleObject);
-        var property = type.GetProperties().Where(a => a.Name == "Property2").Single();
-        ExampleObject obj = new ExampleObject();
-        property.SetValue(obj, "test string");
-        property.GetValue(obj);
-        property.GetCustomAttributes(true);
+        var objType = typeof(ExampleObject);
+        var property = objType.GetProperty("Property2");
+        property.SetValue(obj, "test");
     }
 }

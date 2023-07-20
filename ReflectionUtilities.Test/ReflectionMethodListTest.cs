@@ -18,7 +18,7 @@
             int count = rc.Methods.Count;
 
             // Assert
-            Assert.AreEqual(7, count);
+            Assert.AreEqual(7 + 3*2, count);
         }
 
         [Test]

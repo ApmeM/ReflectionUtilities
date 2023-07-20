@@ -22,13 +22,10 @@ namespace ReflectionUtilities
             this.constructor = method;
             this.Parent = parent;
 
-            // this.returnType = this.constructor..ReturnType;
-            this.Attributes =
-                new ReflectionAttributeList(this.constructor.GetCustomAttributes(true).OfType<Attribute>().ToList());
+            this.Attributes = new ReflectionAttributeList(this.constructor.GetCustomAttributes(true));
             this.Name = this.constructor.Name;
             this.Parameters = this.constructor.GetParameters();
         }
-
 
         public object Invoke(params object[] param)
         {

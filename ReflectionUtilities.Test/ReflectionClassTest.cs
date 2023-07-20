@@ -9,45 +9,6 @@
     public class ReflectionClassTest
     {
         [Test]
-        public void Attributes_AttributesExist_Count()
-        {
-            // Arrange
-            var reflection = ReflectionCache.GetReflection(typeof(ExampleObject));
-            
-            // Act
-            int count = reflection.Attributes.Count;
-
-            // Assert
-            Assert.AreEqual(4, count);
-        }
-
-        [Test]
-        public void Properties_PropertiesExist_Count()
-        {
-            // Arrange
-            var reflection = ReflectionCache.GetReflection(typeof(ExampleObject));
-
-            // Act
-            int count = reflection.Properties.Count;
-
-            // Assert
-            Assert.AreEqual(4, count);
-        }
-
-        [Test]
-        public void Methods_MethodsExist_CountWithStandart()
-        {
-            // Arrange
-            var reflection = ReflectionCache.GetReflection(typeof(ExampleObject));
-
-            // Act
-            int count = reflection.Methods.Count;
-
-            // Assert
-            Assert.AreEqual(7, count);
-        }
-
-        [Test]
         public void BaseType_AnyObject_RealObjectType()
         {
             // Arrange

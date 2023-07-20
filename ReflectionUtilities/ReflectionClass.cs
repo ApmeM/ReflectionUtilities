@@ -6,29 +6,104 @@
 
     public class ReflectionClass
     {
-        private readonly Dictionary<(Type, Type), bool> isAssignableFromCache = new Dictionary<(Type, Type), bool>();
+        private Dictionary<(Type, Type), bool> isAssignableFromCache = new Dictionary<(Type, Type), bool>();
+        private ReflectionAttributeList attributes;
+        private string fullName;
+        private string name;
+        private ReflectionFieldList fields;
+        private ReflectionConstructorList constructors;
+        private ReflectionPropertyList properties;
+        private ReflectionMethodList methods;
 
-        public ReflectionAttributeList Attributes { get; }
         public Type BaseType { get; }
-        public string FullName { get; }
-        public ReflectionMethodList Methods { get; }
-        public string Name { get; }
-        public ReflectionPropertyList Properties { get; }
-        public ReflectionFieldList Fields { get; }
-        public ReflectionConstructorList Constructors { get; }
+        public string FullName
+        {
+            get
+            {
+                if (this.fullName == null)
+                {
+                    this.fullName = BaseType.FullName;
+                }
+                return this.fullName;
+            }
+        }
+
+        public string Name
+        {
+            get
+            {
+                if (this.name == null)
+                {
+                    this.name = BaseType.Name;
+                }
+                return this.name;
+            }
+        }
+
+        public ReflectionAttributeList Attributes
+        {
+            get
+            {
+                if (this.attributes == null)
+                {
+                    this.attributes = new ReflectionAttributeList(BaseType.GetCustomAttributes(true));
+                }
+                return this.attributes;
+            }
+        }
+
+        // It includes also property get and set methods.
+        public ReflectionMethodList Methods
+        {
+            get
+            {
+                if (this.methods == null)
+                {
+                    this.methods = new ReflectionMethodList(this.BaseType.GetMethods(), this);
+                }
+                return this.methods;
+            }
+        }
+
+        public ReflectionPropertyList Properties
+        {
+            get
+            {
+                if (this.properties == null)
+                {
+                    this.properties = new ReflectionPropertyList(this.BaseType.GetProperties(), this);
+                }
+                return this.properties;
+            }
+        }
+
+        public ReflectionFieldList Fields
+        {
+            get
+            {
+                if (this.fields == null)
+                {
+                    this.fields = new ReflectionFieldList(this.BaseType.GetFields(), this);
+                }
+                return this.fields;
+            }
+        }
+
+        public ReflectionConstructorList Constructors
+        {
+            get
+            {
+                if (this.constructors == null)
+                {
+                    this.constructors = new ReflectionConstructorList(this.BaseType.GetConstructors(), this);
+                }
+                return this.constructors;
+            }
+        }
 
         internal ReflectionClass(Type type)
         {
-            this.Attributes = new ReflectionAttributeList(type.GetCustomAttributes(true).OfType<Attribute>().ToList());
             this.BaseType = type;
-            var propertyInfos = type.GetProperties().ToList();
-            var propertyMethods = propertyInfos.SelectMany(a => new[] { a.GetGetMethod(), a.GetSetMethod() });
-            this.Properties = new ReflectionPropertyList(propertyInfos, this);
-            this.Methods = new ReflectionMethodList(type.GetMethods().Except(propertyMethods).ToList(), this);
-            this.Fields = new ReflectionFieldList(type.GetFields().ToList(), this);
-            this.Constructors = new ReflectionConstructorList(type.GetConstructors().ToList(), this);
-            this.Name = type.Name;
-            this.FullName = type.FullName;
         }
 
         public bool IsAssignableFrom(Type type)

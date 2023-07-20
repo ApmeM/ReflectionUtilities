@@ -6,7 +6,7 @@
 
     public class ReflectionMethod
     {
-        private readonly MethodInfo method;
+        public MethodInfo BaseMethod { get; }
 
         public string Name { get; }
         public ParameterInfo[] Parameters { get; }
@@ -19,19 +19,18 @@
 
         internal ReflectionMethod(MethodInfo method, ReflectionClass parent)
         {
-            this.method = method;
+            this.BaseMethod = method;
             this.Parent = parent;
 
-            this.ReturnType = this.method.ReturnType;
-            this.Attributes =
-                new ReflectionAttributeList(this.method.GetCustomAttributes(true).OfType<Attribute>().ToList());
-            this.Name = this.method.Name;
-            this.Parameters = this.method.GetParameters();
+            this.ReturnType = this.BaseMethod.ReturnType;
+            this.Attributes = new ReflectionAttributeList(this.BaseMethod.GetCustomAttributes(true));
+            this.Name = this.BaseMethod.Name;
+            this.Parameters = this.BaseMethod.GetParameters();
         }
 
         public object Invoke(object obj, params object[] param)
         {
-            return this.method.Invoke(obj, param);
+            return this.BaseMethod.Invoke(obj, param);
         }
     }
 }

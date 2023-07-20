@@ -6,7 +6,7 @@ namespace ReflectionUtilities
 {
     public class ReflectionFieldList : List<ReflectionField>
     {
-        internal ReflectionFieldList(List<FieldInfo> fields, ReflectionClass parent)
+        internal ReflectionFieldList(FieldInfo[] fields, ReflectionClass parent)
         {
             this.AddRange(fields.Select(a => new ReflectionField(a, parent)));
         }

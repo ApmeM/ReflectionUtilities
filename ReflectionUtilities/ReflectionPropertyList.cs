@@ -1,16 +1,16 @@
 ﻿namespace ReflectionUtilities
 {
     using System.Collections.Generic;
-    using System.Linq;
     using System.Reflection;
 
-    public class ReflectionPropertyList : List<ReflectionProperty>
+    public class ReflectionPropertyList : Dictionary<string, ReflectionProperty>
     {
-        internal ReflectionPropertyList(List<PropertyInfo> properties, ReflectionClass parent)
+        internal ReflectionPropertyList(PropertyInfo[] properties, ReflectionClass parent)
         {
-            this.AddRange(properties.Select(a => new ReflectionProperty(a, parent)));
+            foreach (var property in properties)
+            {
+                this.Add(property.Name, new ReflectionProperty(property, parent));
+            }
         }
-
-        public ReflectionProperty this[string name] => this.Where(a => a.Name == name).SingleOrDefault();
     }
 }

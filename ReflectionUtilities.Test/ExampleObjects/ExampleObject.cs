@@ -14,7 +14,9 @@
         [Custom]
         public int Field2;
 
-        public int Property1 { get; set; }
+        public string Property1 { get; set; }
+
+        int IExampleInterface.Property1 { get; set; }
 
         [Custom]
         [Custom]
@@ -48,7 +50,7 @@
 
         [Custom]
         [Custom]
-        public void Test(int value)
+        public void Test(string value)
         {
             this.Property1 = value;
         }

@@ -41,10 +41,10 @@
             ReflectionClass rc = ReflectionCache.GetReflection(typeof(ExampleObject));
 
             // Act
-            var property = rc.Properties["Property12"];
+            var propertyExists = rc.Properties.ContainsKey("Property12");
 
             // Assert
-            Assert.IsNull(property);
+            Assert.IsFalse(propertyExists);
         }
     }
 }

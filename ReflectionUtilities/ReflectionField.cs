@@ -21,8 +21,7 @@ namespace ReflectionUtilities
             this.field = field;
             this.Parent = parent;
 
-            this.Attributes =
-                new ReflectionAttributeList(this.field.GetCustomAttributes(true).OfType<Attribute>().ToList());
+            this.Attributes = new ReflectionAttributeList(this.field.GetCustomAttributes(true));
             this.Name = this.field.Name;
             this.FieldType = this.field.FieldType;
 
